@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const Post = require("../models/Post");
-const {sendEmail} = require("../middleware/serEmail");
+const {sendEmail} = require("../middlewares/sendEmail");
 const crypto = require("crypto");
 
 exports.register = async(req,res) =>{
@@ -18,7 +18,7 @@ exports.register = async(req,res) =>{
        const token = await user.generateToken();
 
        const options = {
-           expires: new DataTransfer(Date.now() + 90 * 24* 60 * 60 * 1000),
+           expires: new Date(Date.now() + 90 * 24* 60 * 60 * 1000),
            httpOnly: true,
        };
       res
@@ -63,7 +63,7 @@ try{
     const token = await user.generateToken();
 
     const options = {
-        expires: new DataTransfer(Date.now() + 90 * 24* 60 * 60 * 1000),
+        expires: new Date(Date.now() + 90 * 24* 60 * 60 * 1000),
         httpOnly: true,
     };
    res
